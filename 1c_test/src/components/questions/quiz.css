@@ -1,0 +1,268 @@
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.quiz-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+.progress-bar {
+  height: 30px;
+  background-color: #e9ecef;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  border-radius: 15px;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.current-stats {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #6c757d;
+}
+
+.current-stats strong {
+  color: #2c3e50;
+}
+
+.question-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.question-id {
+  color: #3498db;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.question-chapter {
+  color: #7f8c8d;
+  font-size: 16px;
+  margin: 0;
+  text-align: right;
+}
+
+.question-text {
+  color: #2c3e50;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.options {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.option {
+  padding: 15px 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+.option:hover {
+  background-color: #e9f7fe;
+  border-color: #3498db;
+}
+
+.option.selected {
+  background-color: #e3f2fd;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.option.correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  animation: pulse-green 0.5s;
+}
+
+.option.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+  animation: pulse-red 0.5s;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.feedback {
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.correct-feedback {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.incorrect-feedback {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.feedback-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.feedback-icon {
+  font-size: 24px;
+}
+
+.results-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.results-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+.results-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-item:nth-child(1) .stat-value {
+  color: #28a745;
+}
+
+.stat-item:nth-child(2) .stat-value {
+  color: #dc3545;
+}
+
+.stat-item:nth-child(3) .stat-value {
+  color: #3498db;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.results-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.retry-btn, .main-menu-btn {
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.retry-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.main-menu-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.retry-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.main-menu-btn:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
