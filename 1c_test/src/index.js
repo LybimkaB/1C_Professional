@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Router, Route, Switch, Routes, BrowserRouter } from 'react-router-dom';
-import Main from './components/main';
+import Main from './main';
 import Quiz from './components/questions/question';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
           <Route path="/" element={<Main/> } />
           <Route path="/mistakes"></Route>

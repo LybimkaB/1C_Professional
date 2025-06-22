@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import './quiz.css';
 
 const Quiz = () => {
@@ -26,15 +26,20 @@ const Quiz = () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
-
+ 
   // Загрузка вопросов
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         setLoading(true);
         setError(null);
+
+        let response = await axios.get(`http://192.168.0.125:8080/chapter/${testId}`);
         
-        const response = await axios.get(`http://192.168.0.125:8080/chapter/${testId}`);
+        if (testId == "mistakes")
+        {
+          response = await axios.get(`http://192.168.0.125:8080/mistakes`);
+        }
         
         if (!response.data || !Array.isArray(response.data)) {
           throw new Error("Некорректный формат данных");
@@ -57,8 +62,27 @@ const Quiz = () => {
     fetchQuestions();
   }, [testId]);
 
+    // Функция для отправки PUT запроса при неверном ответе
+  const sendIncorrectAnswer = async (questionId) => {
+    try {
+      await axios.put(`http://192.168.0.125:8080/chapter/${testId}?id=${questionId}`);
+    } catch (err) {
+      console.error('Ошибка при отправке неверного ответа:', err);
+    }
+  };
+
+  const sendAnswerResult = async (questionId, isFailed) => {
+    try {
+      const isFailedNum = isFailed ? 1:0;
+
+      await axios.put(`http://192.168.0.125:8080/mistakes?id=${questionId}&isFailed=${isFailedNum}`);
+    } catch (err) {
+      console.error('Ошибка при отправке результата ответа:', err);
+    }
+  };
+
   // Обработка выбора ответа
-  const handleAnswerSelect = (option) => {
+  const handleAnswerSelect = async (option) => {
     if (isAnswered) return;
     
     setSelectedAnswer(option);
@@ -68,6 +92,15 @@ const Quiz = () => {
     setIsCorrect(correct);
     setIsAnswered(true);
     setShowFeedback(true);
+    
+    // Если ответ неверный, отправляем PUT запрос
+    if (testId === "mistakes") {
+      await sendAnswerResult(questions[currentQuestionIndex].id, !correct);
+    }
+    // Для других тестов отправляем только неправильные ответы
+    else if (!correct) {
+      await sendIncorrectAnswer(questions[currentQuestionIndex].id, true);
+    }
     
     // Обновляем результаты
     setResults(prev => ({
@@ -132,7 +165,7 @@ const Quiz = () => {
 
   return (
     <div className="quiz-container">
-      <h1 className="quiz-title">Тест: Глава {testId}</h1>
+        <h1 className="quiz-title">Тест: Глава {testId}</h1>
       
       {/* Прогресс-бар */}
       <div className="progress-bar">
@@ -147,12 +180,14 @@ const Quiz = () => {
       
       {/* Статистика правильных ответов */}
       <div className="current-stats">
-        Правильных ответов: {results.correct} / {results.answered}
+        Правильных ответов: {results.correct} / {questions.length}
       </div>
       
       {/* Блок вопроса (скрывается на последнем вопросе после ответа) */}
       {!showResults && (
         <div className="question-card">
+          <Link to="/" className='quiz_back'>×</Link>
+
           <div className="question-header">
             <h2 className="question-id">{currentQuestion.id} {currentQuestion.text}</h2>
           </div>

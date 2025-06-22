@@ -1,6 +1,6 @@
 import React from 'react';
 import {Router, Route, Switch, Routes, BrowserRouter } from 'react-router-dom';
-import Btn from './buttons/button';
+import Btn from './components/buttons/button';
 import style from './main.module.css'
 
 function Main(){
@@ -8,7 +8,7 @@ function Main(){
         <section className={style.main}>
             <div className={style.main_content}>
                 <h3 className={style.title}>1C: Профессионал</h3>
-                <Btn id="mistaks" btnClass="mistakes" text="Проработка ошибок"/>
+                <Btn id="mistakes" btnClass="mistakes" text="Проработка ошибок"/>
                 <Btn id="1" btnClass="chapter1" text="1. Общие механизмы, понятия и термины"/>
                 <Btn id="2" btnClass="chapter2" text="2. Редакторы и инструменты общие"/>
                 <Btn id="3" btnClass="chapter3" text="3. Редакторы и инструменты режима разработки"/>

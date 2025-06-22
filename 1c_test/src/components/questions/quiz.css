@@ -199,6 +199,7 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
+  gap: 20px;
 }
 
 .stat-item {
@@ -243,6 +244,9 @@
   cursor: pointer;
   transition: all 0.3s;
   font-weight: bold;
+  text-align: center;
+  line-height: 15px;
+  height: auto;
 }
 
 .retry-btn {
@@ -265,4 +269,24 @@
   background-color: #5a6268;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.question-card{
+  position: relative;
+}
+
+.quiz_back{
+  position: absolute;
+  font-size: 20px;
+  color: white;
+  list-style: none;
+  text-decoration: none;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  background-color: #3498db;
+  height: 20px;
+  line-height: 15px;
+  width: 20px;
+  text-align: center;
 }
